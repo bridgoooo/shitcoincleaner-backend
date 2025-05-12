@@ -1,0 +1,25 @@
+{
+  "name": "solana-wallet-registry",
+  "version": "1.0.0",
+  "description": "A service to track wallet interactions with a Solana program and maintain a scoreboard.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-indexer": "node indexer.js"
+  },
+  "keywords": [
+    "solana",
+    "express",
+    "api",
+    "scoreboard"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "@solana/web3.js": "^1.91.0",
+    "dotenv": "^16.4.5",
+    "pg": "^8.11.5"
+  }
+} 
