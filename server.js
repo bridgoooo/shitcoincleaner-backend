@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const db = require('./db'); // Import the database connection setup
 const { Connection, PublicKey } = require('@solana/web3.js'); // Required for indexer logic now
+const cors = require('cors'); // Import CORS middleware
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +16,13 @@ if (!SOLANA_PROGRAM_ID_STRING || !SOLANA_RPC_ENDPOINT) { // Check RPC endpoint t
 }
 
 app.use(express.json()); // Middleware to parse JSON bodies
+
+// Configure CORS for shitcoincleaner.com domains
+app.use(cors({
+    origin: ['https://shitcoincleaner.com', 'https://www.shitcoincleaner.com'],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // --- Solana/Indexer Setup ---
 const SOLANA_PROGRAM_ID = new PublicKey(SOLANA_PROGRAM_ID_STRING);
