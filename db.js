@@ -3,12 +3,16 @@ require('dotenv').config(); // Load environment variables from .env file
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    // Optional: SSL configuration if your database requires it (e.g., on platforms like Heroku)
-    // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    // Enable SSL and disable certificate authority verification
+    // This is common for managed databases or when using self-signed certs
+    // Set rejectUnauthorized to true if you have the CA cert and want full verification
+    ssl: {
+        rejectUnauthorized: false 
+    }
 });
 
 pool.on('connect', () => {
-    console.log('Connected to PostgreSQL database!');
+    console.log('Connected to PostgreSQL database (SSL)!');
 });
 
 pool.on('error', (err) => {
